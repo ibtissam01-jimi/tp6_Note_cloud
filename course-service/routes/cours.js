@@ -1,9 +1,9 @@
-// routes/course.js
+
 const express = require('express');
 const Course = require('../model/cour');
 const router = express.Router();
 
-// a. Récupérer tous les cours
+
 router.get('/all', async (req, res) => {
   try {
     const courses = await Course.find();
@@ -13,10 +13,12 @@ router.get('/all', async (req, res) => {
   }
 });
 
-// b. Ajouter un nouveau cours
+
+
+
 router.post('/add', async (req, res) => {
   try {
-    const newCourse = new Course(req.body); // Pas de validation des champs
+    const newCourse = new Course(req.body); 
     await newCourse.save();
     res.status(201).json({ message: 'Cours ajouté avec succès'});
   } catch (err) {
@@ -24,35 +26,42 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// c. Mettre à jour un cours existant
+
+
+
+
 router.put('/update/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const updatedCourse = await Course.findByIdAndUpdate(id, req.body, { new: true });
     if (!updatedCourse) {
-      return res.status(404).json({ message: 'Cours non trouvé' });
+      return res.status(404).json({ message: 'Cours non trouve' });
     }
-    res.json({ message: 'Cours mis à jour avec succès'});
+    res.json({ message: 'Cours mis a jour avec succes'});
   } catch (err) {
-    res.status(500).json({ message: 'Erreur lors de la mise à jour du cours', error: err });
+    res.status(500).json({ message: 'Erreur lors de la mise a jour ', error: err });
   }
 });
 
-// d. Supprimer un cours
+
+
+
 router.delete('/delete/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const deletedCourse = await Course.findByIdAndDelete(id);
     if (!deletedCourse) {
-      return res.status(404).json({ message: 'Cours non trouvé' });
+      return res.status(404).json({ message: 'Cours non trouve' });
     }
-    res.json({ message: 'Cours supprimé avec succès' });
+    res.json({ message: 'Cours supprime ' });
   } catch (err) {
-    res.status(500).json({ message: 'Erreur lors de la suppression du cours', error: err });
+    res.status(500).json({ message: 'Erreur lors de la suppression ', error: err });
   }
 });
 
-// e. Rechercher des cours en fonction d'un terme clé
+
+
+
 router.get('/search', async (req, res) => {
   try {
     const { keyword } = req.query;

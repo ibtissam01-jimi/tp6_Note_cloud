@@ -21,7 +21,7 @@ app.use('/api/courses/delete', verifyToken);
 app.use('/api/courses/profile', verifyToken); 
 
 
-//ajouter et all
+
 app.use('/api/courses', courseRoutes);
 
 
